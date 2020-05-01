@@ -1,3 +1,5 @@
+const fetch = require('node-fetch');
+
 /**
  * getTimeAndWeather takes in an array of location (as a String)
  * console logs weather and time 
@@ -26,7 +28,13 @@
  * returning weather and timezone within an array
  */
  function getWeatherAndTimezone(location){
-
+    const url = `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=81fd3a25df3903c95746b8c7ffb9c8c4`
+    let weather;
+    let timezone;
+    fetch(url)
+    .then(data => data.json())
+    .then(data => {console.log(data, data.weather)})
+    .catch(error => {console.log(error)})
  }
 
 /**
@@ -40,3 +48,5 @@
  function getTime(timezone){
 
  }
+
+ getWeatherAndTimezone("New York")
