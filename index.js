@@ -10,7 +10,11 @@
  */
 
  function getTimeAndWeather(array){
-
+    for(let [location,zipcode] of array){
+       const [weather, timezone] = getWeatherAndTimezone(location, zipcode)
+       const time = getTime(timezone)
+       console.log("weather: " + weather + "time: " +time)
+    }
  }
 
  /**
