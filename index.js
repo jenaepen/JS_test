@@ -11,14 +11,14 @@ const fetch = require('node-fetch');
  *  5) prints out "weather:" weather "time:" time
  */
 
- function getTimeAndWeather(array){
+const getTimeAndWeather = function (array){
     for(let location of array){
        const [weather, timezone] = getWeatherAndTimezone(location)
        const time = getTime(timezone)
        console.log("weather: " + weather + "time: " +time)
     }
  }
-
+ exports.getTimeAndWeather= getTimeAndWeather;
  /**
  * getWeatherAndTimezone takes in an location
  * returns the weather (as a String) and timezone (as a number) within an array
@@ -27,7 +27,7 @@ const fetch = require('node-fetch');
  * Then destructing the weather.description and timezone from the returned data object
  * returning weather and timezone within an array
  */
- function getWeatherAndTimezone(location){
+const getWeatherAndTimezone = function (location){
     const url = `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=81fd3a25df3903c95746b8c7ffb9c8c4`
     let weather;
     let timezone;
@@ -36,6 +36,7 @@ const fetch = require('node-fetch');
     .then(data => {console.log(data, data.weather)})
     .catch(error => {console.log(error)})
  }
+exports.getWeatherAndTimezone = getWeatherAndTimezone
 
 /**
  * getTime takes in the timezone
@@ -45,8 +46,7 @@ const fetch = require('node-fetch');
  * Convert timeInSeconds to hours, minutes, seconds 
  * return a string HH:MM:SS in 24hr format
  */
- function getTime(timezone){
+const getTime = function (timezone){
 
  }
-
- getWeatherAndTimezone("New York")
+exports.getTime = getTime
