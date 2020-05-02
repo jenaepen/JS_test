@@ -13,9 +13,16 @@ const fetch = require('node-fetch');
 
 const getTimeAndWeather = function (array){
     for(let location of array){
-       const [weather, timezone] = getWeatherAndTimezone(location)
-       const time = getTime(timezone)
-       console.log("weather: " + weather + "time: " +time)
+      const dataPromise =  Promise.resolve(getWeatherAndTimezone(location))
+      dataPromise
+      .then( data => {
+        const [weather, timezone] = data
+        const time = getTime(timezone)
+        console.log("weather: " + weather + "time: " +time)
+      })
+      .catch(data => {
+          console.log("weather: " + data[0] + "time: " + data[1])
+        }) 
     }
  }
  exports.getTimeAndWeather= getTimeAndWeather;
@@ -23,18 +30,35 @@ const getTimeAndWeather = function (array){
  * getWeatherAndTimezone takes in an location
  * returns the weather (as a String) and timezone (as a number) within an array
  * It declares and initialize url with the location 
- * Fetches url by using open weather's api 
- * Then destructing the weather.description and timezone from the returned data object
- * returning weather and timezone within an array
+ * It declares and initialize promise to a new promise 
+ *      which fetches the url by using open weather's api 
+ *      If the return data.cod from the fetch is 200 (status 200),
+ *      Then 
+ *          declares and initialize weather to data.weather[0].description 
+ *          declares and initialize timezone to data.timezone
+ *          then resolves the promise with [weather, timezone]
+ *      Else
+ *          rejects the promise with [null, null]
+ * Returns the promise
  */
-const getWeatherAndTimezone = function (location){
+const getWeatherAndTimezone =  function (location){
     const url = `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=81fd3a25df3903c95746b8c7ffb9c8c4`
-    let weather;
-    let timezone;
-    fetch(url)
-    .then(data => data.json())
-    .then(data => {console.log(data, data.weather)})
-    .catch(error => {console.log(error)})
+    const promise = new Promise((resolve, reject)=>{
+        fetch(url)
+        .then(result=> result.json())
+        .then(data => {
+            if(Number(data.cod) === 200){
+                const weather =  data.weather[0].description;
+                const timezone = data.timezone;
+                resolve([weather,timezone]);
+            }
+            else reject(["error","error"])
+        })
+        .catch(error => {
+            reject(["error","error"])
+        })
+    } )
+    return promise;
  }
 exports.getWeatherAndTimezone = getWeatherAndTimezone
 
