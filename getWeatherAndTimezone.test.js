@@ -1,4 +1,4 @@
-const {getWeatherAndTimezone} = require("./index")
+const {getWeatherAndTimezone} = require("./getWeatherAndTimezone.js")
 
 
 describe('Test getWeatherAndTimezone function with a valid input', () => {
