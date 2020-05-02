@@ -4,16 +4,20 @@ const fetch = require('node-fetch');
  * getTimeAndWeather takes in an array of location (as a String)
  * console logs weather and time 
  * It iterates over the array while doing the following:
- *  1) invokes getWeatherAndTimezone with a location 
- *  2) declare and initialize weather and timezone from getWeatherAndTimezone
- *  3) invokes getTime with timezone
- *  4) declare and initialize time from timezone
- *  5) prints out "weather:" weather "time:" time
+ *  1) declare and initialize dataPromise to be the returned promise from 
+ *     invoking getWeatherAndTimezone with a location 
+ *  2) if the promise resolves then
+ *     2a) declare and initialize weather and timezone from the return data
+ *     2b) declare and initialize time to the returned value from 
+ *         invoking getTime with timezone
+ *     2c) console log "weather:" weather "time:" time
+ *  3) if the promise is rejected then
+ *     3a) console log "weather:" data[0] "time:" data[1] Note: data = ["error","error"]     
  */
 
 const getTimeAndWeather = function (array){
     for(let location of array){
-      const dataPromise =  Promise.resolve(getWeatherAndTimezone(location))
+      const dataPromise = getWeatherAndTimezone(location)
       dataPromise
       .then( data => {
         const [weather, timezone] = data
@@ -71,6 +75,19 @@ exports.getWeatherAndTimezone = getWeatherAndTimezone
  * return a string HH:MM:SS in 24hr format
  */
 const getTime = function (timezone){
+    const date = new Date();
+    const utcHours = date.getUTCHours();
+    const utcMinutes = date.getUTCMinutes();
+    const utcSeconds = date.getUTCSeconds();
+    let timeInSeconds = utcHours * 3600 + utcMinutes * 60 + utcSeconds + timezone
 
+    const hours = Math.floor(timeInSeconds / 3600) 
+    timeInSeconds = timeInSeconds % 3600
+
+    const minutes = Math.floor(timeInSeconds / 60) 
+    const seconds = timeInSeconds % 60
+
+    let string = `${hours}:${minutes}:${seconds}`
+    return string    
  }
 exports.getTime = getTime
