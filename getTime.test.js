@@ -1,4 +1,4 @@
-const {getTime} = require("./index")
+const {getTime} = require("./getTime.js")
 
 
 describe('Test getTime function with New York timezone', () => {
