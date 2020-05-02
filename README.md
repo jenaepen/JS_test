@@ -1,10 +1,10 @@
 # JS_test
 ## Instructions:
-    * clone file
-    * Go to getTimeAndWeather.js 
-    * Set "input" on line ... to your desired input (valid input is an array of locations ex:  
+    1. clone file
+    2. Go to getTimeAndWeather.js 
+    3. Set "input" on line ... to your desired input (valid input is an array of locations ex:  
     ["new york, 10278, "london"])
-    * Within the terminal, type in "node getTimeAndWeather.js"
-    * If the input is valid, the location's current time and weather of locations will console logged out. 
+    4. Within the terminal, type in "node getTimeAndWeather.js"
+    5. If the input is valid, the location's current time and weather of locations will console logged out. 
     Else, "weather: error time: error" will console logged out
 
