@@ -23,3 +23,14 @@ describe('Test getTime function with london timezone', () => {
         expect(result).toEqual("17:00:00")
     })
 })
+
+describe('Test getTime function with error', () => {
+    const input = "error";
+    let result = getTime(input)
+    it('returns a string', () => {
+        expect(typeof result).toBe("string")
+    })
+    it('input of "error" returns error',  () => {
+        expect(result).toEqual("error")
+    })
+})
