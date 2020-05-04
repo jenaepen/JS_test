@@ -1,0 +1,5 @@
+const {getTimeAndWeather} = require("./getTimeAndWeather.js")
+
+const userInput = ["new york, 10278", "london","fake"]
+
+getTimeAndWeather(userInput)
