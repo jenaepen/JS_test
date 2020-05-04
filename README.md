@@ -6,5 +6,5 @@
     ["new york, 10278, "london"])
     4. Within the terminal, type in "npm run start"
     5. If the input is valid, the location's current time and weather of locations will console logged out. 
-    Else, "weather: error time: error" will console logged out
+    Else, an error will be created
 
