@@ -34,6 +34,3 @@ const getTimeAndWeather = function (array){
  }
  exports.getTimeAndWeather= getTimeAndWeather;
 
-const userInput = ["new york, 10278", "london"]
-
-getTimeAndWeather(userInput)

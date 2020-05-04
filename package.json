@@ -4,7 +4,8 @@
   "description": "Logs the current time and weather of locations",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose --detectOpenHandles"
+    "test": "jest --verbose --detectOpenHandles",
+    "start": "node input.js"
   },
   "repository": {
     "type": "git",

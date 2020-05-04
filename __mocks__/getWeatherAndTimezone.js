@@ -12,7 +12,7 @@ const fetch = require('node-fetch');
  *          declares and initialize timezone to data.timezone
  *          then resolves the promise with [weather, timezone]
  *      Else
- *          rejects the promise with [null, null]
+ *          rejects the promise with ["error", "error"]
  * Returns the promise
  */
 const getWeatherAndTimezone =  function (location){

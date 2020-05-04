@@ -16,13 +16,16 @@ const getTime = function (timezone, date = new Date()){
         let timeInSeconds = utcHours * 3600 + utcMinutes * 60 + utcSeconds + timezone
     
         let hours = Math.floor(timeInSeconds / 3600) 
+        if(hours < 0) hours = 24 + hours;
         if(hours < 10) hours = `0${hours}`
         timeInSeconds = timeInSeconds % 3600
     
-        let minutes = Math.floor(timeInSeconds / 60) 
+        let minutes = Math.floor(timeInSeconds / 60)
+        if(minutes < 0) minutes = 60 + minutes;
         if(minutes < 10) minutes = `0${minutes}`
     
         let seconds = timeInSeconds % 60
+        if(seconds < 0)  seconds = 60 + seconds;
         if(seconds < 10) seconds = `0${seconds}`
     
         let string = `${hours}:${minutes}:${seconds}`
