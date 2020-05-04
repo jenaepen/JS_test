@@ -10,9 +10,10 @@ const {getTime} = require("./getTime.js")
  *     2a) declare and initialize weather and timezone from the return data
  *     2b) declare and initialize time to the returned value from 
  *         invoking getTime with timezone
- *     2c) console log "weather:" weather "time:" time
+ *     2c) console log "Input:" location
+ *                     "Output: weather:" weather "time:" time
  *  3) if the promise is rejected then
- *     3a) console log "weather:" weather "time:" time Note: [weather,time] = ["error","error"]     
+ *     3a) an error is provide with the same string but weather = "error" and time = "error"     
  */
 
 const getTimeAndWeather = function (array){
@@ -23,11 +24,11 @@ const getTimeAndWeather = function (array){
       .then( data => {
         const [weather, timezone] = data
         const time = getTime(timezone)
-        console.log(`weather: ${weather} time: ${time}`)
+        console.log(`Input: ${location}\nOutput: weather: ${weather} time: ${time}\n`)
       })
       .catch(data => {
         const [weather, time] = data
-        console.log(`weather: ${weather} time: ${time}`)
+        new Error(`Input: ${location}\nOutput: weather: ${weather} time: ${time}\n`)
       }) 
     }
   }  

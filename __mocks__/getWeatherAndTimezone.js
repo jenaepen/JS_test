@@ -17,12 +17,17 @@ const fetch = require('node-fetch');
  */
 const getWeatherAndTimezone =  function (location){
     const options = {
-        "New York": Promise.resolve(["nice weather", -14400]),
-        "New York, 10278": Promise.resolve(["bad weather", -14400]),
-        "London": Promise.resolve(["clear skies", 3600]),
-        "": Promise.reject(["error","error"]),
-        "fake": Promise.reject(["error","error"]),
+        "New York": ["nice weather", -14400],
+        "New York, 10278": ["bad weather", -14400],
+        "London": ["clear skies", 3600],
+        "": ["error","error"],
+        "fake": ["error","error"],
     }
-    return options[location];
+    const invalid = new Set(["","fake"])   
+    const promise = new Promise((resolve, reject)=>{
+        if(invalid.has(location)) reject(options[location])
+        else resolve(options[location])
+    })
+    return promise;
  }
 exports.getWeatherAndTimezone = getWeatherAndTimezone
