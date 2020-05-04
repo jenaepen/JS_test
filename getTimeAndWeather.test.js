@@ -10,7 +10,7 @@ describe('Test getTimeAndWeather function', () => {
     it('accept as array"', async () => {
         const consoleSpy = jest.spyOn(console, "log"); 
         await getTimeAndWeather(["New York"])
-        expect(consoleSpy).toHaveBeenCalledWith('weather: nice weather time: 12:00:00');
+        expect(consoleSpy).toHaveBeenCalledWith('weather: nice weather time: 12:00:00');   
     });
     it('accept array with multiple input"', async () => {
         const consoleSpy = jest.spyOn(console, "log"); 
